@@ -1,15 +1,15 @@
 import os
-import re
-
 from setuptools import setup
 
 
 def get_version():
     with open(os.path.join("src", "vhelper", "__init__.py"), "r", encoding="utf-8") as f:
         file_content = f.read()
-        pattern = r"{}\W*=\W*\'([^\"]+)\'".format("__version__")
-        version = re.findall(pattern, file_content)
-        return version
+        for line in file_content.splitlines():
+            if line.startswith("__version__"):
+                version_line = line
+                verision = version_line.split("=")[-1].strip().strip('"').strip("'")
+                return verision
 
 
 _deps = ["nlpertools"]
@@ -28,4 +28,5 @@ def main():
 
 if __name__ == "__main__":
     main()
-    # get_version()
+    # res = get_version()
+    # print(res)
