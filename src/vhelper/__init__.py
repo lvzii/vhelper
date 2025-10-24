@@ -3,4 +3,4 @@ from .utils import *
 from .sim import *
 from .kmap import *
 
-__version__ = "0.0.2"
+__version__ = "0.0.3"

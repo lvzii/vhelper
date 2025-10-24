@@ -103,6 +103,7 @@ class IverilogSoftware(object):
         :return: 处理后的命令列表
         """
         if self.timeout > 0:
+            # TODO 忘记这里timeout会杀死timeout的程序吗
             cmd_list.insert(0, f"timeout {self.timeout}s")
         if self.platform == "wsl":
             cmd_list = ["wsl", "-d", self.distro_name, "bash", "-c"] + [" ".join(cmd_list)]
@@ -184,6 +185,7 @@ class IverilogSoftware(object):
             return result
         cmd_list = ["vvp", self.default_compiled_file]
         cmd_list = self.postprocess_cmd(cmd_list)
+        print(cmd_list)
         result = subprocess.run(
             cmd_list,
             capture_output=True,
